@@ -1,16 +1,31 @@
-import { useState } from "react";
-// import "./App.css";
+import { Dashboard } from "@mui/icons-material";
+import "./App.css";
 import HomeLayout from "./pages/HomeLayout"; // Layout will contain the dashboard
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, Routes, Route } from "react-router-dom";
 
+
+const router = createBrowserRouter([
+  {path: "/",
+    element: <App />,
+    // loader: appLoader,
+    children: [
+      {
+        path: "dashboard",
+        element: <HomeLayout />,
+        // loader: homeLoader
+        children: [
+          {
+            path: ""
+          }
+        ]
+      }
+    ]
+}
+])
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <BrowserRouter>
-        <HomeLayout />
-      </BrowserRouter>
+      <HomeLayout />
     </>
   );
 }
