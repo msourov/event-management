@@ -1,31 +1,14 @@
-import { Dashboard } from "@mui/icons-material";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./Routing";
 import "./App.css";
-import HomeLayout from "./pages/HomeLayout"; // Layout will contain the dashboard
-import { createBrowserRouter, Routes, Route } from "react-router-dom";
+import HomeLayout from "./pages/HomeLayout";
 
-
-const router = createBrowserRouter([
-  {path: "/",
-    element: <App />,
-    // loader: appLoader,
-    children: [
-      {
-        path: "dashboard",
-        element: <HomeLayout />,
-        // loader: homeLoader
-        children: [
-          {
-            path: ""
-          }
-        ]
-      }
-    ]
-}
-])
 function App() {
   return (
     <>
-      <HomeLayout />
+      <RouterProvider router={router}>
+        <HomeLayout />
+      </RouterProvider>
     </>
   );
 }

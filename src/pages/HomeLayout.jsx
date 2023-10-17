@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { Breadcrumb, Layout, Space, Menu } from "antd";
-import "../styles/homelayout.css";
-
+import { Link, Navigate } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import TvIcon from "@mui/icons-material/Tv";
 import CampaignIcon from "@mui/icons-material/Campaign";
+import "../styles/homelayout.css";
+
 const { Header, Footer, Sider, Content } = Layout;
 
 function HomeLayout() {
   const [collapsed, setCollapsed] = useState(false);
+  const [activeChild, setActiveChild] = useState(null);
+
   const items = [
-    { key: "1", icon: <HomeIcon />, label: "Dashboard" },
+    { key: "1", icon: <HomeIcon />, label: "Dashboard", link: "/" },
     {
       key: "2",
       icon: <PeopleIcon />,
@@ -20,10 +23,12 @@ function HomeLayout() {
         {
           label: "Role",
           key: "role",
+          link: "/role",
         },
         {
           label: "User",
           key: "user",
+          link: "/user",
         },
       ],
     },
@@ -35,14 +40,17 @@ function HomeLayout() {
         {
           label: "Packages",
           key: "packages",
+          link: "/packages",
         },
         {
           label: "App User",
           key: "app-user",
+          link: "/app-user",
         },
         {
           label: "Storage",
           key: "storage",
+          link: "/storage",
         },
       ],
     },
@@ -54,14 +62,21 @@ function HomeLayout() {
         {
           label: "Ad List",
           key: "ad-list",
+          link: "/ad-list",
         },
         {
           label: "Doctors",
           key: "doctors",
+          link: "/doctors",
         },
       ],
     },
   ];
+
+  const handleChildItemClick = (childItem) => {
+    setActiveChild(childItem.key);
+    console.log("activeChild", activeChild);
+  };
 
   return (
     <div>
@@ -84,7 +99,31 @@ function HomeLayout() {
               defaultSelectedKeys={["1"]}
               mode="inline"
               items={items}
-            />
+            >
+              {console.log("item", items)}
+              {items.map((item) =>
+                !item.children ? (
+                  <Menu.Item
+                    key={item.key}
+                    onClick={
+                      () => handleChildItemClick(item)
+                      // <Link to={item.link ?? item.children.}>{item.label}</Link>
+                    }
+                  >
+                    {console.log("link", item.link)}
+                    {item.icon}
+                    {item.label}
+                  </Menu.Item>
+                ) : (
+                  <Menu.Item
+                    key={item.children.key}
+                    onClick={() => handleChildItemClick(item.children)}
+                  >
+                    {item.children.label}
+                  </Menu.Item>
+                )
+              )}
+            </Menu>
           </Sider>
           {/* <Space style={{ width: "100vw" }}> */}
           <Content
@@ -94,9 +133,7 @@ function HomeLayout() {
               border: "8px solid #c3c9d4",
             }}
           >
-            <Breadcrumb>
-              <Breadcrumb.Item>Home/</Breadcrumb.Item>
-            </Breadcrumb>
+            {/* <Breadcrumb items={} /> */}
           </Content>
           {/* </Space> */}
         </Layout>
