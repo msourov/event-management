@@ -11,6 +11,7 @@ import AppUser from "./pages/tv_app_management/AppUser";
 import Storage from "./pages/tv_app_management/Storage";
 import AdList from "./pages/ad_management/AdList";
 import Doctors from "./pages/ad_management/Doctors";
+import Settings from "./pages/Settings";
 
 // export const router = createBrowserRouter([
 //   {
@@ -59,6 +60,7 @@ export const router = createBrowserRouter(
       <Route path="/storage" element={<Storage />} />
       <Route path="/ad-list" element={<AdList />} />
       <Route path="/doctors" element={<Doctors />} />
+      <Route path="/settings" element={<Settings />} />
     </Route>
   )
 );

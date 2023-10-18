@@ -5,6 +5,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import TvIcon from "@mui/icons-material/Tv";
 import CampaignIcon from "@mui/icons-material/Campaign";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SettingsIcon from '@mui/icons-material/Settings';
+import CopyrightIcon from '@mui/icons-material/Copyright';
 import "../styles/homelayout.css";
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -71,6 +74,12 @@ function HomeLayout() {
         },
       ],
     },
+    {
+      key: "5",
+      icon: <SettingsIcon />,
+      label: "Settings",
+      link: "/settings"
+    }
   ];
 
   const handleChildItemClick = (childItem) => {
@@ -81,7 +90,10 @@ function HomeLayout() {
   return (
     <div>
       <Layout style={{ width: "100vw", height: "100vh" }}>
-        <Header style={{ color: "white" }}></Header>
+        <Header style={{ color: "white", display: "flex", alignItems: "center" }}>
+          <AccountCircleIcon style={{color: "white", marginLeft: "auto"}}/>
+          <span style={{marginLeft: "5px"}}>User</span>
+        </Header>
         <Layout hasSider>
           <Sider
             collapsible
@@ -95,12 +107,16 @@ function HomeLayout() {
                 flexDirection: "column",
                 gap: "4px",
               }}
+              onClick={link => {
+                // <Link to={link} />
+                console.log('link', link)
+              }}
               theme="dark"
               defaultSelectedKeys={["1"]}
               mode="inline"
               items={items}
             >
-              {console.log("item", items)}
+              {/* {console.log("item", items)}
               {items.map((item) =>
                 !item.children ? (
                   <Menu.Item
@@ -122,7 +138,7 @@ function HomeLayout() {
                     {item.children.label}
                   </Menu.Item>
                 )
-              )}
+              )} */}
             </Menu>
           </Sider>
           {/* <Space style={{ width: "100vw" }}> */}
@@ -137,7 +153,10 @@ function HomeLayout() {
           </Content>
           {/* </Space> */}
         </Layout>
-        <Footer style={{}}></Footer>
+        <Footer style={{backgroundColor: "white", color: "black",justifyContent: "center", padding: "12px", display: "flex", alignItems: "center"}}>
+          <CopyrightIcon style={{width: "16px", marginRight: "5px"}}/>
+          <span><p style={{fontFamily: "sans-serif", fontWeight: "300"}}>Copyright 2023. All rights reserved.</p></span>
+          </Footer>
       </Layout>
     </div>
   );
