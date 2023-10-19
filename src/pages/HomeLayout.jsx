@@ -82,20 +82,23 @@ const items = [
 function HomeLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
-  const [selectedKeys, setSelectedKeys] = useState(["1"]);
+  // const [selectedKeys, setSelectedKeys] = useState(["1"]);
   const handleMenuItemClick = (childItem) => {
-    navigate(childItem.key);
-    console.log("childItem.key", childItem.key);
+    // console.log("childItem", childItem);
+    navigate(childItem.keyPath[0]);
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: "100vw" }}>
       <Layout style={{ width: "100vw", height: "100vh" }}>
-        <Header
-          style={{ color: "white", display: "flex", alignItems: "center" }}
-        >
-          <AccountCircleIcon style={{ color: "white", marginLeft: "auto" }} />
-          <span style={{ marginLeft: "5px" }}>User</span>
+        <Header>
+          <Link
+            to="/profile"
+            style={{ color: "white", display: "flex", alignItems: "center" }}
+          >
+            <AccountCircleIcon style={{ color: "white", marginLeft: "auto" }} />
+            <span style={{ marginLeft: "5px" }}>User</span>
+          </Link>
         </Header>
         <Layout hasSider>
           <Sider
@@ -117,36 +120,12 @@ function HomeLayout() {
               theme="dark"
               defaultSelectedKeys={["1"]}
               mode="inline"
-              selectedKeys={selectedKeys}
+              // selectedKeys={selectedKeys}
               items={items}
               onClick={handleMenuItemClick}
-            >
-              {/* {console.log("item", items)}
-              {items.map((item) =>
-                !item.children ? (
-                  <Menu.Item
-                    key={item.key}
-                    onClick={
-                      () => handleChildItemClick(item)
-                      // <Link to={item.link ?? item.children.}>{item.label}</Link>
-                    }
-                  >
-                    {console.log("link", item.link)}
-                    {item.icon}
-                    {item.label}
-                  </Menu.Item>
-                ) : (
-                  <Menu.Item
-                    key={item.children.key}
-                    onClick={() => handleChildItemClick(item.children)}
-                  >
-                    {item.children.label}
-                  </Menu.Item>
-                )
-              )} */}
-            </Menu>
+            />
           </Sider>
-          {/* <Space style={{ width: "100vw" }}> */}
+
           <Content
             style={{
               color: "black",
@@ -155,12 +134,14 @@ function HomeLayout() {
             }}
           >
             {/* <Breadcrumb items={} /> */}
-            <Link
-              to={"/role"}
-              style={{ color: "black ", alignItems: "center" }}
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
             >
-              Go to role
-            </Link>
+              <Outlet />
+            </div>
           </Content>
           {/* </Space> */}
         </Layout>

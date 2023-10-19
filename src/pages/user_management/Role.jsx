@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function Role() {
+  // const [data, setData] = useState("");
+  // const [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   const apiURL = "http://192.168.60.86:8000/";
+  //   axios
+  //     .get(apiURL)
+  //     .then((response) => {
+  //       setData(response.data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       setLoading(false);
+  //     });
+  // });
   return (
-    <div>
-      Role
-      {console.log("inside role")}
+    <div
+      style={{
+        outline: "auto",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      {/* {console.log("data", data)} */}
     </div>
   );
 }
