@@ -14,6 +14,8 @@ import AdList from "./pages/ad_management/AdList";
 import Doctors from "./pages/ad_management/Doctors";
 import Settings from "./pages/Settings";
 import UserProfile from "./pages/UserProfile";
+import Login from "./pages/Login";
+import Signup from "./pages/SIgnup";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +30,9 @@ export const router = createBrowserRouter(
       <Route path="doctors" element={<Doctors />} />
       <Route path="settings" element={<Settings />} />
       <Route path="profile" element={<UserProfile />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="login" element={<Login />} />
+
       <Route path="*" element={<p>Nothing here. Go back.</p>} />
     </Route>
   )

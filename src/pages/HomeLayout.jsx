@@ -9,7 +9,9 @@ import CampaignIcon from "@mui/icons-material/Campaign";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CopyrightIcon from "@mui/icons-material/Copyright";
+import LoginIcon from "@mui/icons-material/Login";
 import "../styles/homelayout.css";
+import Login from "./Login";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -77,6 +79,7 @@ const items = [
     label: "Settings",
     link: "/settings",
   },
+  
 ];
 
 function HomeLayout() {
@@ -91,15 +94,30 @@ function HomeLayout() {
   return (
     <div style={{ maxWidth: "100vw" }}>
       <Layout style={{ width: "100vw", height: "100vh" }}>
-        <Header>
+        <Header
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
+        >
           <Link
             to="/profile"
-            style={{ color: "white", display: "flex", alignItems: "center" }}
+            style={{
+              color: "white",
+              marginRight: "15px",
+              padding: "none",
+              marginTop: "10px",
+            }}
           >
             <AccountCircleIcon style={{ color: "white", marginLeft: "auto" }} />
-            <span style={{ marginLeft: "5px" }}>User</span>
+            {/* <span style={{ marginLeft: "5px" }}>User</span> */}
+          </Link>
+          <Link to="/login" style={{ marginTop: "10px" }}>
+            <LoginIcon style={{ color: "white", marginLeft: "auto" }} />
           </Link>
         </Header>
+
         <Layout hasSider>
           <Sider
             collapsible
@@ -137,7 +155,7 @@ function HomeLayout() {
             <div
               style={{
                 width: "100%",
-                height: "100%",
+                maxHeight: "100%",
               }}
             >
               <Outlet />
