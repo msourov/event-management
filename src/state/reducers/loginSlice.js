@@ -6,14 +6,13 @@ const initialState = {
   user: null,
 };
 
-
-
 const loginSlice = createSlice({
-  name: "login",
+  name: "auth",
   initialState,
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload;
+      state.isLoggedIn = true;
     },
     setUser: (state, action) => {
       state.user = action.payload;
@@ -23,13 +22,14 @@ const loginSlice = createSlice({
       state.user = null;
       state.token = null;
     },
+    // SET_IS_LOGGED_IN: (state, action) => {
+    //   state.isLoggedIn = action.payload;
+    // },
   },
 });
 
 export const { setToken, setUser, logout } = loginSlice.actions;
 export default loginSlice.reducer;
-
-
 
 // import { useDispatch, useSelector } from 'react-redux';
 // import { loginSuccess, logout } from './loginSlice';

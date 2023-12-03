@@ -1,20 +1,30 @@
-import React from "react";
-import { login } from "../action/auth";
+import { loginUser } from "../action/auth";
 import { Form, Input, Button, Checkbox } from "antd";
-
-const onFinish = async (values) => {
-  try {
-    await login(values);
-  } catch (error) {
-    console.error("Error logging in...", error);
-  }
-};
-
-const onFinishFailed = () => {
-  console.error("form submission failed");
-};
+import { useDispatch, useSelector } from "react-redux";
+import { setToken, setUser } from "../state/reducers/loginSlice";
 
 function Login() {
+  const dispatch = useDispatch();
+  const reduxState = useSelector((state) => state);
+  const onFinish = async (values) => {
+    console.log(values);
+    try {
+      const response = await loginUser(values);
+      if (response && response.access_token && response.name) {
+        console.log("login successful ", response);
+        dispatch(setToken(response.access_token));
+        dispatch(setUser(response.name));
+        // dispatch({ type: "SET_IS_LOGGED_IN", payload: true });
+      }
+    } catch (error) {
+      console.error("Error logging in...", error);
+    }
+  };
+
+  const onFinishFailed = () => {
+    console.error("form submission failed");
+  };
+  console.log("redux state", reduxState);
   return (
     <>
       <Form
@@ -22,7 +32,9 @@ function Login() {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{
-          maxWidth: 600,
+          width: "40vw",
+          margin: "auto",
+          // maxWidth: 600,
           marginBlock: "10%",
           marginInline: "15%",
         }}
