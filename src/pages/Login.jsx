@@ -2,6 +2,7 @@ import { loginUser } from "../action/auth";
 import { Form, Input, Button, Checkbox } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken, setUser } from "../state/reducers/loginSlice";
+import { Navigate } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function Login() {
         console.log("login successful ", response);
         dispatch(setToken(response.access_token));
         dispatch(setUser(response.name));
-        // dispatch({ type: "SET_IS_LOGGED_IN", payload: true });
+        return <Navigate to="/" />;
       }
     } catch (error) {
       console.error("Error logging in...", error);
