@@ -18,12 +18,13 @@ function Role() {
   // });
   return (
     <div
-      style={{
-        outline: "auto",
-        width: "100%",
-        height: "100%",
-      }}
+      // style={{
+      //   outline: "auto",
+      //   width: "100%",
+      //   height: "100%",
+      // }}
     >
+      Role
       {/* {console.log("data", data)} */}
     </div>
   );

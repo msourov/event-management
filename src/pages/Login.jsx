@@ -1,11 +1,12 @@
 import { loginUser } from "../action/auth";
 import { Form, Input, Button, Checkbox } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken, setUser } from "../state/reducers/loginSlice";
-import { Navigate } from "react-router-dom";
+import { setToken, setUser} from "../state/reducers/loginSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const reduxState = useSelector((state) => state);
   const onFinish = async (values) => {
     console.log(values);
@@ -15,7 +16,7 @@ function Login() {
         console.log("login successful ", response);
         dispatch(setToken(response.access_token));
         dispatch(setUser(response.name));
-        return <Navigate to="/" />;
+        navigate('/');
       }
     } catch (error) {
       console.error("Error logging in...", error);
@@ -35,7 +36,6 @@ function Login() {
         style={{
           width: "40vw",
           margin: "auto",
-          // maxWidth: 600,
           marginBlock: "10%",
           marginInline: "15%",
         }}

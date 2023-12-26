@@ -6,11 +6,17 @@ export const loginUser = async ({ user_id, password }) => {
       user_id: user_id,
       password: password,
     });
-
-    if (response.status === 200) {
+    if (response.status === 201) {
       return response.data;
+  
     }
+    
   } catch (error) {
-    console.error("Error logging in!", error);
+    if (error.response.status === 400) {
+      console.log('5555555',error.response.data)
+      
+  
+    }
+
   }
 };

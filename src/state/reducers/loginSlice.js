@@ -20,15 +20,12 @@ const loginSlice = createSlice({
     logout: (state) => {
       state.isLoggedIn = false;
       state.user = null;
-      state.token = null;
     },
-    // SET_IS_LOGGED_IN: (state, action) => {
-    //   state.isLoggedIn = action.payload;
-    // },
+
   },
 });
 
-export const { setToken, setUser, logout } = loginSlice.actions;
+export const { setToken, setUser, logout, } = loginSlice.actions;
 export default loginSlice.reducer;
 
 // import { useDispatch, useSelector } from 'react-redux';
