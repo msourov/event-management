@@ -12,6 +12,7 @@ import CopyrightIcon from "@mui/icons-material/Copyright";
 import LoginIcon from "@mui/icons-material/Login";
 import "../styles/homelayout.css";
 import Login from "./Login";
+import { useSelector } from "react-redux";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -79,7 +80,6 @@ const items = [
     label: "Settings",
     link: "/settings",
   },
-  
 ];
 
 function HomeLayout() {
@@ -90,7 +90,8 @@ function HomeLayout() {
     // console.log("childItem", childItem);
     navigate(childItem.keyPath[0]);
   };
-
+  const isAuthenticated = useSelector((state) => state.login.isLoggedIn);
+  console.log(isAuthenticated);
   return (
     <div style={{ maxWidth: "100vw" }}>
       <Layout style={{ width: "100vw", height: "100vh" }}>
@@ -113,9 +114,15 @@ function HomeLayout() {
             <AccountCircleIcon style={{ color: "white", marginLeft: "auto" }} />
             {/* <span style={{ marginLeft: "5px" }}>User</span> */}
           </Link>
-          <Link to="/login" style={{ marginTop: "10px" }}>
-            <LoginIcon style={{ color: "white", marginLeft: "auto" }} />
-          </Link>
+          {isAuthenticated ? (
+            <Link to="/logout" style={{ marginTop: "10px" }}>
+              <LoginIcon style={{ color: "white", marginLeft: "auto" }} />
+            </Link>
+          ) : (
+            <Link to="/login" style={{ marginTop: "10px" }}>
+              <LoginIcon style={{ color: "white", marginLeft: "auto" }} />
+            </Link>
+          )}
         </Header>
 
         <Layout hasSider>

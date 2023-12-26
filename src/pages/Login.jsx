@@ -1,25 +1,46 @@
 import { loginUser } from "../action/auth";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Alert } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken, setUser} from "../state/reducers/loginSlice";
+import { setToken, setUser } from "../state/reducers/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { clearError } from "../state/reducers/errorSlice";
+import MessageAlert from "../action/MessageAlert";
+import { useEffect, useState } from "react";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const error = useSelector((state) => state.error);
+  const [loginError, setLoginError] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
   const reduxState = useSelector((state) => state);
+
+  // useEffect(() => {
+  //   if (showAlert) {
+  //     const timer = setTimeout(() => {
+  //       setShowAlert(false);
+  //       dispatch(clearError());
+  //     }, 2000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [showAlert, dispatch]);
+
   const onFinish = async (values) => {
     console.log(values);
     try {
-      const response = await loginUser(values);
+      const response = await loginUser({ ...values, dispatch });
       if (response && response.access_token && response.name) {
-        console.log("login successful ", response);
+        // <Alert message="Loggin in successfully" type="success" showIcon />;
         dispatch(setToken(response.access_token));
         dispatch(setUser(response.name));
-        navigate('/');
+        dispatch(clearError());
+        navigate("/");
+      } else {
+        setLoginError(error);
       }
     } catch (error) {
       console.error("Error logging in...", error);
+      setShowAlert(true);
     }
   };
 
@@ -29,6 +50,12 @@ function Login() {
   console.log("redux state", reduxState);
   return (
     <>
+      {loginError && (
+        <div>
+          <MessageAlert type="error" value={error.message} />
+          {/* <Alert message={error.message} type="error" showIcon /> */}
+        </div>
+      )}
       <Form
         name="basic"
         labelCol={{ span: 8 }}

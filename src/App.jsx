@@ -15,51 +15,28 @@ import UserProfile from "./pages/UserProfile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import PrivateRoutes from "./PrivateRoutes";
+import Logout from "./pages/Logout";
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path="/" element={<HomeLayout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route element={<PrivateRoutes />}>
+          <Route path="login" element={<Login />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/" element={<HomeLayout />}>
+              <Route path="signup" element={<Signup />} />
               <Route path="role" element={<Role />} />
-            </Route>
-            ;
-            <Route element={<PrivateRoutes />}>
               <Route path="user" element={<User />} />
-            </Route>
-            ;
-            <Route element={<PrivateRoutes />}>
               <Route path="packages" element={<Packages />} />
-            </Route>
-            ;
-            <Route element={<PrivateRoutes />}>
               <Route path="app-user" element={<AppUser />} />
-            </Route>
-            ;
-            <Route element={<PrivateRoutes />}>
               <Route path="storage" element={<Storage />} />
-            </Route>
-            ;
-            <Route element={<PrivateRoutes />}>
               <Route path="ad-list" element={<AdList />} />
-            </Route>
-            ;
-            <Route element={<PrivateRoutes />}>
               <Route path="doctors" element={<Doctors />} />
-            </Route>
-            ;
-            <Route element={<PrivateRoutes />}>
               <Route path="settings" element={<Settings />} />
-            </Route>
-            ;
-            <Route element={<PrivateRoutes />}>
               <Route path="profile" element={<UserProfile />} />
+              <Route path="logout" element={<Logout />} />
             </Route>
-            ;
           </Route>
           <Route path="*" element={<p>Nothing here. Go back.</p>} />
         </Routes>
